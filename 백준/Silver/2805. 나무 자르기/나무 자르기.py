@@ -12,9 +12,9 @@ while start <= end:
     for i in arr:
         if i > mid:
             wood_sum += i - mid
-    if wood_sum < M:
-        end = mid-1
-    else:
+    if wood_sum >=M:
         start = mid+1
+    else:
+        end = mid-1
 
 print(end)
