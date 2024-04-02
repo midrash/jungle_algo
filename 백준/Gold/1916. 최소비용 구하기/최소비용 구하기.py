@@ -27,13 +27,12 @@ while que:
     for toCost, toNode in tree[startNode]:
         # print(f"확인 장소 : {toNode}, 비용 {toCost}")
         # print(f"기존 비용 : {cost[toNode]}, 새 비용 {cost[node] + toCost}")
-        if cost[toNode] <= nowCost + toCost:
-            continue
-
-        cost[toNode] = nowCost + toCost
-        # print(f"비용 업데이트 : {cost}")
-        heapq.heappush(que, (nowCost + toCost, toNode))
+        if cost[toNode] > nowCost + toCost:
+            cost[toNode] = nowCost + toCost
+            # print(f"비용 업데이트 : {cost}")
+            heapq.heappush(que, (nowCost + toCost, toNode))
         # print(f"큐 업데이트 : {que}")
 
 print(f"{cost[goal]}")
+
 
