@@ -4,11 +4,12 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
-arr = [[1] * 3 for _ in range(N)]
+arr = [[1] * 2]
+i = 1
+while i < N:
+    temp = arr[0][0]
+    arr[0][0] = (arr[0][0] + arr[0][1]) % 9901
+    arr[0][1] = (arr[0][0] + temp) % 9901
+    i += 1
 
-for i in range(1, N):
-    arr[i][0] = (arr[i - 1][1] + arr[i - 1][2])%9901
-    arr[i][1] = (arr[i - 1][0] + arr[i - 1][2])%9901
-    arr[i][2] = (arr[i - 1][0] + arr[i - 1][1] + arr[i - 1][2])%9901
-
-print((arr[N - 1][0] + arr[N - 1][1] + arr[N - 1][2])%9901)
+print(((2 * arr[0][0]) + arr[0][1]) % 9901)
