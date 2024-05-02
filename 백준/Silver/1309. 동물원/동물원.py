@@ -4,12 +4,13 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
-arr = [[1] * 2]
+left = 1
+right = 1
 i = 1
 while i < N:
-    temp = arr[0][0]
-    arr[0][0] = (arr[0][0] + arr[0][1]) % 9901
-    arr[0][1] = (arr[0][0] + temp) % 9901
+    temp = left
+    left = (left + right)%9901
+    right = (left + temp)%9901
     i += 1
 
-print(((2 * arr[0][0]) + arr[0][1]) % 9901)
+print((2 * (left) + right) % 9901)
