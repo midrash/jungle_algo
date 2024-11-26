@@ -1,57 +1,50 @@
 import sys
 from collections import deque
 
-# dfsque = deque()
-bsdque = deque()
+dq = deque()
+input= sys.stdin.readline
 
-# sys.setrecursionlimit(10**9)
-input = sys.stdin.readline
-N, M, V = map(int, input().split())
-# print(N, M, V)
-check = [False] * (N + 1)
+N,M,V = map(int,input().split())
+map_ = [[] for _ in range(N+1)]
+for _ in range(M):
+    a,b = map(int,input().split())
+    map_[a].append(b)
+    map_[b].append(a)
+    
+for i in range(1,len(map_)):
+    map_[i].sort()
+    
+result=[]
+visited = [False]*(N+1)
 
-grap = [[0 for _ in range(N + 1)] for _ in range(N + 1)]
+def print_result(result):
+    for i in range(len(result)):
+        print(result[i],end=" ")
+    print()
 
-for i in range(M):
-    l, r = map(int, input().split())
-    grap[l][r] = 1
-    grap[r][l] = 1
-
-
-def printgrap():
-    for i in range(N + 1):
-        print(grap[i])
-
-
-# printgrap()
-
-
-def dfs(start):
-    check[start] = True
-    print(start, end=" ")
-    for i in range(1, N + 1):
-        if grap[start][i] == 1:
-            if check[i] == False:
-                dfs(i)
-
-
-def bfs(start):
-    bsdque.append(start)
-    # print(check)
-    while len(bsdque) > 0:
-        num = bsdque.popleft()
-        check[num] = True
-        print(num, end=" ")
-        # print(check)
-        for i in range(1, N + 1):
-            if grap[num][i] == 1:
-                if check[i] == False:
-                    bsdque.append(i)
-                    check[i] = True
-        # print(bsdque)
-
+def dfs(v):
+    visited[v]= True
+    result.append(v)
+    for i in map_[v]:
+        if not visited[i]:
+            dfs(i)
 
 dfs(V)
-print()
-check = [False] * (N + 1)
+print_result(result)
+
+result=[]
+visited = [False]*(N+1)
+def bfs(v):
+    dq.append(v)
+    visited[v]=True
+    result.append(v)
+    while len(dq)>0:
+        num = dq.popleft()
+        for i in map_[num]:
+            if not visited[i]:
+                dq.append(i)
+                visited[i]=True
+                result.append(i)
 bfs(V)
+print_result(result)
+
