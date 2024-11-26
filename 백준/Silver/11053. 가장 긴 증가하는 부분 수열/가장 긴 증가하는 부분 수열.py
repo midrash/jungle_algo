@@ -1,20 +1,15 @@
 import sys
 
-#sys.stdin = open("input.txt", "r")
 input = sys.stdin.readline
 
 N = int(input())
-arr = list(map(int, input().split()))
-suyol = [1] * (N)
-# print(arr)
-# print(suyol)
-
-max_ = 1
-for i in range(1, N):
+dp= [0]*N
+arr = list(map(int,input().split()))
+dp[0]=1
+for i in range(N):
+    max_=0
     for j in range(i):
-        if arr[j] < arr[i]:
-            suyol[i] = max(suyol[i], suyol[j] + 1)
-            if max_ < suyol[i]:
-                max_ = suyol[i]
-# print(suyol)
-print(max_)
+        if arr[j]<arr[i] and max_<dp[j]:
+            max_= max_+1
+    dp[i]= max_+1
+print(max(dp))
