@@ -2,20 +2,9 @@ import sys
 
 input = sys.stdin.readline
 
-N = int(input().strip())
+N = int(input())
 
-if N % 3 == 0:
-    if (int((N / 3)) % 2) == 0:
-        print("CY")
-    else:
-        print("SK")
-elif N % 3 == 1:
-    if (int((N / 3)) % 2) == 0:
-        print("SK")
-    else:
-        print("CY")
+if N %2 ==0:
+    print("CY")
 else:
-    if (int((N / 3)) % 2) == 0:
-        print("CY")
-    else:
-        print("SK")
+    print("SK")
